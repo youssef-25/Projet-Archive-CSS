@@ -1,0 +1,9 @@
+node_modules
+.next
+.env.local
+
+.vercel
+
+# Vidéos : 314 Mo, exclues du dépôt pour ne pas alourdir l'historique Git.
+# Elles restent sur le site déployé et dans ton dossier local.
+public/videos
