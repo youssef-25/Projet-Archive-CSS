@@ -1,5 +1,7 @@
 "use client";
+import { useState } from "react";
 import { useLang, LEGENDS, TITRES } from "../../lib/i18n";
+import { normalise } from "./Joueurs";
 
 const SCOPE_ORDER = ["national", "regional", "international"];
 
@@ -30,13 +32,37 @@ function sortByScope(competitions) {
   );
 }
 
+// Une compétition correspond si son nom, une de ses années ou un de ses joueurs correspond.
+function filtrer(competitions, req, lang) {
+  if (req === "") return competitions;
+  return competitions.filter((comp) =>
+    normalise(comp.name[lang]).includes(req) ||
+    comp.editions.some(([annee, joueurs]) =>
+      String(annee).includes(req) || (joueurs && normalise(joueurs[lang]).includes(req))
+    )
+  );
+}
+
 export default function Titres() {
   const { t, lang } = useLang();
+  const [q, setQ] = useState("");
+  const req = normalise(q.trim());
+  const blocs = TITRES.map((bloc) => ({ ...bloc, competitions: filtrer(bloc.competitions, req, lang) }))
+    .filter((bloc) => bloc.competitions.length > 0);
   return (
     <section id="titres"><div className="wrap">
       <h2>{t.titres.title}</h2>
       <p className="lead">{t.titres.lead}</p>
-      {TITRES.map(({ sport, group, competitions }, s, sports) => (
+      <input
+        className="recherche"
+        type="search"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder={t.search.titres}
+        aria-label={t.search.titres}
+      />
+      {blocs.length === 0 ? <p className="note">{t.search.vide}</p> : null}
+      {blocs.map(({ sport, group, competitions }, s, sports) => (
         <div className="tit-sport" id={sportAnchor(sport, group)} key={sport.fr + (group ? group.fr : "")}>
           {s === 0 || sports[s - 1].sport.fr !== sport.fr ? <h3>{sport[lang]}</h3> : null}
           {group ? <p className="tit-group">{group[lang]}</p> : null}

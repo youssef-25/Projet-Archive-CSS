@@ -46,6 +46,10 @@ html[lang="ar"] .kicker{letter-spacing:0;font-size:15px}
   .links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg2);border-bottom:1px solid var(--line);padding:8px 24px 16px}
   .links.open a{padding:14px 0;border-bottom:1px solid var(--line)}
   .logo small{display:none}
+  /* sans survol possible sur ecran tactile, le sous-menu s'affiche en permanence */
+  .links.open .has-sub{display:flex;flex-direction:column}
+  .links.open .submenu{position:static;display:flex;padding-top:0;min-width:0}
+  .links.open .submenu a{padding-inline-start:18px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--mute);font-size:14px}
 }
 /* hero */
 .hero{position:relative;padding-block:96px 72px;background:radial-gradient(900px 420px at 85% 0%,rgba(208,166,98,.16),transparent 60%)}
@@ -111,6 +115,14 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:12px}
 .leg-table .leg-photo{width:140px}
 .leg-table .tit-year{width:110px;font:600 18px var(--sans);color:var(--gold);white-space:nowrap}
 .leg-table .etr-pays{width:170px;color:var(--gold);font-size:15px}
+.recherche{width:100%;max-width:420px;margin-bottom:22px;padding:12px 15px;background:var(--card);border:1px solid var(--line);color:var(--text);font:400 15px var(--sans)}
+.recherche:focus{outline:none;border-color:var(--gold)}
+.recherche::placeholder{color:var(--mute)}
+.leg-bio{margin:0 0 10px;color:var(--text);font-size:15px;line-height:1.55}
+.leg-palmares{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.leg-palmares li{font-size:14px;line-height:1.4}
+.leg-palmares b{color:var(--text);font-weight:500}
+.leg-palmares span{color:var(--gold);font:600 13px var(--sans)}
 .leg-table .etr-periode{width:120px;color:var(--mute);font:600 14px var(--sans);white-space:nowrap}
 .tit-sport{margin-top:32px}
 .tit-sport h3{font:500 26px var(--serif);margin-bottom:14px}
@@ -138,10 +150,17 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:12px}
 .leg-table .leg-txt{color:var(--mute);font-size:14px}
 @media (max-width:640px){
   .leg-table td{padding:10px}
-  .leg-table .leg-photo{width:80px}
-  .leg-table .leg-photo img{width:70px;height:70px}
+  .leg-table .leg-photo{width:112px}
+  .leg-table .leg-photo img{width:100px;height:100px}
   .leg-table .leg-name{font-size:16px;white-space:normal}
   .leg-table .leg-txt{display:none}
+  /* tableau des joueurs etrangers : 4 colonnes illisibles sur telephone */
+  .leg-table .etr-periode{display:none}
+  .leg-table .etr-pays{width:auto;font-size:14px}
+  /* le palmares garde ses annees, la colonne des effectifs est masquee */
+  .leg-table th.leg-txt{display:none}
+  .tit-comp-head img{width:54px;height:54px}
+  .tit-comp-head h4{font-size:19px}
 }
 #legendes .info{background:var(--card);border:1px solid var(--line);padding:16px;display:grid;gap:10px}
 .fiche h3{font-size:22px;font-weight:500}
