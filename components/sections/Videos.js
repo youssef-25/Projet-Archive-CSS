@@ -6,6 +6,7 @@ export default function Videos() {
   return (
     <section id="videos"><div className="wrap">
       <h2>{t.videos.title}</h2>
+      <p className="lead">{t.videos.freeLead}</p>
       {VIDEOS_LIBRES.length === 0 ? (
         <p className="note">{t.videos.freeEmpty}</p>
       ) : (
