@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Galerie from "../Galerie";
 import Timeline from "../Timeline";
 import { useLang } from "../../lib/i18n";
 
@@ -23,6 +24,8 @@ export default function Accueil() {
       <div className="stats"><div className="wrap">
         {t.stats.map(([n, l]) => <div className="stat" key={l}><b>{n}</b><span>{l}</span></div>)}
       </div></div>
+
+      <Galerie />
 
       <section id="enquete"><div className="wrap">
         <div className="kicker">{t.survey.kicker}</div>

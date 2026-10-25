@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLang, LANGS, TITRES } from "../lib/i18n";
-import { sportAnchor } from "./sections/Titres";
+import { sportAnchor } from "../lib/liens";
 
 export default function Header() {
   const { lang, setLang, t } = useLang();

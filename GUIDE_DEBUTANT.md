@@ -32,7 +32,8 @@ Puis :
 npm install
 npm run dev
 ```
-Ouvrez http://localhost:3000 dans votre navigateur. Le site s'affiche.
+Ouvrez http://localhost:3001 dans votre navigateur. Le site s'affiche.
+(Le port 3001 évite les conflits avec d'autres projets qui utilisent souvent le port 3000. Ce réglage ne concerne que votre ordinateur : le site en ligne sur Vercel n'est pas concerné.)
 
 ## Étape 3 : tester
 1. Remplissez le formulaire « Être prévenu du lancement » avec votre email.
