@@ -193,55 +193,16 @@ export default function Joueurs() {
           aria-label={t.search.joueurs}
         />
         {legendes.length === 0 ? <p className="note">{t.search.vide}</p> : (
-        <table className="leg-table">
-          <thead>
-            <tr>
-              <th className="leg-photo">{t.leg.thPhoto}</th>
-              <th className="leg-name">{t.leg.thName}</th>
-              <th className="leg-txt">{t.leg.thTxt}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {legendes.map(({ f, i }) => {
-              const palmares = palmaresDe(f.label[lang], lang);
-              return (
-                <tr key={f.id} id={"leg-" + f.id}>
-                  <td className="leg-photo">
-                    {f.photo ? (
-                      <button
-                        className="leg-vignette"
-                        onClick={() => ouvrir(i)}
-                        aria-label={t.leg.open + " — " + f.label[lang]}
-                      >
-                        <img src={f.photo} alt={f.label[lang]} />
-                      </button>
-                    ) : t.leg.ph}
-                  </td>
-                  <td className="leg-name">
-                    <button className="leg-ouvrir" onClick={() => ouvrir(i)}>
-                      {f.label[lang]}
-                      <small>{t.leg.open}</small>
-                    </button>
-                  </td>
-                  <td className="leg-txt">
-                    {f.bio ? <p className="leg-bio">{f.bio[lang]}</p> : null}
-                    {palmares.length === 0 ? (f.bio ? null : t.leg.txt) : (
-                      <ul className="leg-palmares">
-                        {palmares.map(({ competition, ancre, annees }) => (
-                          <li key={competition}>
-                            <Link href={"/titres#" + ancre} title={t.leg.voirComp}>
-                              <b>{competition}</b> <span>{annees.join(" · ")}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <ul className="visages">
+          {legendes.map(({ f, i }) => (
+            <li key={f.id} id={"leg-" + f.id}>
+              <button onClick={() => ouvrir(i)} aria-label={t.leg.open + " — " + f.label[lang]}>
+                {f.photo ? <img src={f.photo} alt="" loading="lazy" /> : <span className="visage-vide">{t.leg.ph}</span>}
+                <span>{f.label[lang]}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
         )}
       </div></section>
 
@@ -249,41 +210,20 @@ export default function Joueurs() {
         <h2>{t.etr.title}</h2>
         <p className="lead">{t.etr.lead}</p>
         {etrangers.length === 0 ? <p className="note">{t.search.vide}</p> : (
-        <table className="leg-table">
-          <thead>
-            <tr>
-              <th className="leg-photo">{t.etr.thPhoto}</th>
-              <th className="leg-name">{t.etr.thName}</th>
-              <th className="etr-pays">{t.etr.thPays}</th>
-              <th className="etr-periode">{t.etr.thPeriode}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {etrangers.map(({ f, i }) => (
-              <tr key={f.id} id={"leg-" + f.id}>
-                <td className="leg-photo">
-                  {f.photo ? (
-                    <button
-                      className="leg-vignette"
-                      onClick={() => ouvrir(i)}
-                      aria-label={t.leg.open + " — " + f.label[lang]}
-                    >
-                      <img src={f.photo} alt={f.label[lang]} />
-                    </button>
-                  ) : t.etr.ph}
-                </td>
-                <td className="leg-name">
-                  <button className="leg-ouvrir" onClick={() => ouvrir(i)}>
-                    {f.label[lang]}
-                    <small>{t.leg.open}</small>
-                  </button>
-                </td>
-                <td className="etr-pays">{f.pays[lang]}</td>
-                <td className="etr-periode">{f.periode}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ul className="visages">
+          {etrangers.map(({ f, i }) => (
+            <li key={f.id} id={"leg-" + f.id}>
+              <button onClick={() => ouvrir(i)} aria-label={t.leg.open + " — " + f.label[lang]}>
+                {f.photo ? <img src={f.photo} alt="" loading="lazy" /> : <span className="visage-vide">{t.etr.ph}</span>}
+                <span>{f.label[lang]}</span>
+                <small>
+                  {f.drapeau ? <img className="visage-drapeau" src={"/flags/" + f.drapeau + ".svg"} alt="" /> : null}
+                  {f.pays[lang]} · {f.periode}
+                </small>
+              </button>
+            </li>
+          ))}
+        </ul>
         )}
       </div></section>
 

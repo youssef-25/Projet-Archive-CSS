@@ -19,7 +19,7 @@ export default function Accueil() {
           <Link className="btn" href="/participer">{t.hero.b1}</Link>
           <a className="btn ghost" href="#frise">{t.hero.b2}</a>
         </div>
-      </div></div>
+      </div><p className="hero-credit">{t.hero.credit}</p></div>
 
       <div className="stats"><div className="wrap">
         {t.stats.map(([n, l]) => <div className="stat" key={l}><b>{n}</b><span>{l}</span></div>)}

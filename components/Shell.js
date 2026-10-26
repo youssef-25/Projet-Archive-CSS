@@ -12,8 +12,8 @@ export default function Shell({ children }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const enCascade = [
-      ...document.querySelectorAll("#legendes tbody tr"),
-      ...document.querySelectorAll("#etrangers tbody tr"),
+      ...document.querySelectorAll("#legendes .visages > li"),
+      ...document.querySelectorAll("#etrangers .visages > li"),
       ...document.querySelectorAll("#pilote .kpi"),
       ...document.querySelectorAll(".partners-logos > *"),
     ];
