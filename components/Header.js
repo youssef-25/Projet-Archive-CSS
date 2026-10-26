@@ -23,7 +23,7 @@ export default function Header() {
       <header className="hdr">
         <div className="wrap">
           <Link className="logo" href="/">
-            <img className="mark" src="https://assets.football-logos.cc/logos/tunisia/700x700/cs-sfaxien.a0c20fc4.png" alt="" aria-hidden="true" />
+            <img className="mark" src="/logo-css.png" alt="" aria-hidden="true" />
             <span><b>{t.brand}</b><small>{t.tagline}</small></span>
           </Link>
           <nav className={"links" + (open ? " open" : "")} onClick={() => setOpen(false)}>
