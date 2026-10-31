@@ -9,6 +9,13 @@ export function normalise(s) {
   return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
+// Dans une biographie, on cherche des débuts de mots et non des fragments :
+// sans quoi « ali » ressortait dans « réalisée » ou « finale ». Le découpage
+// sur les non-lettres fonctionne aussi bien en arabe qu'en alphabet latin.
+function motCommencePar(texte, req) {
+  return normalise(texte).split(/[^\p{L}\p{N}]+/u).some((mot) => mot.startsWith(req));
+}
+
 // Reconstitue le palmarès d'un joueur à partir des effectifs du tableau des titres.
 // Chaque entrée garde l'ancre de sa compétition pour pouvoir y renvoyer.
 function palmaresDe(nom, lang) {
@@ -174,7 +181,7 @@ export default function Joueurs() {
   const req = normalise(q.trim());
   const legendes = FICHES.map((f, i) => ({ f, i }))
     .filter(({ f }) => f.groupe === "legende")
-    .filter(({ f }) => req === "" || normalise(f.label[lang]).includes(req) || (f.bio && normalise(f.bio[lang]).includes(req)));
+    .filter(({ f }) => req === "" || normalise(f.label[lang]).includes(req) || (f.bio && motCommencePar(f.bio[lang], req)));
   const etrangers = FICHES.map((f, i) => ({ f, i }))
     .filter(({ f }) => f.groupe === "etranger")
     .filter(({ f }) => req === "" || normalise(f.label[lang]).includes(req) || normalise(f.pays[lang]).includes(req) || f.periode.includes(req));

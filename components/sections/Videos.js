@@ -15,7 +15,14 @@ export default function Videos() {
             <div className="vid-card" key={v.file || v.drive || v.id}>
               {v.file ? (
                 <div className="vid-embed">
-                  <video src={v.file} controls preload="metadata" />
+                  {/* Sans couverture, la vignette reste un rectangle noir tant
+                      que le visiteur n'a pas lancé la lecture. */}
+                  <video
+                    src={v.file}
+                    poster={v.file.replace("/videos/", "/videos/couvertures/").replace(".mp4", ".jpg")}
+                    controls
+                    preload="metadata"
+                  />
                 </div>
               ) : v.drive ? (
                 <div className="vid-embed">
